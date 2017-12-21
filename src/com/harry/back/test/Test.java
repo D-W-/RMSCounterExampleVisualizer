@@ -1,5 +1,6 @@
 package com.harry.back.test;
 
+
 /**
  * Tsmart-build-capture: The build capture component of Tsmart platform
  * Created by Han Wang.
@@ -29,5 +30,6 @@ public class Test {
 //        } catch (IOException e) {
 //            throw new RuntimeException(e.getMessage());
 //        }
+
     }
 }

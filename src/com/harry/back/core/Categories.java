@@ -1,16 +1,17 @@
 package com.harry.back.core;
 
+/**
+ * RMS related tools, parse formatted data into RMS input and run RMS, then visualize output.
+ * Created by Han Wang at 12/21/17.
+ * Copyright (C) 2015-2017  Han Wang
+ */
+
 import com.google.common.collect.Maps;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 
 import java.util.Map;
 
-/**
- * Tsmart-build-capture: The build capture component of Tsmart platform
- * Created by Han Wang.
- * Copyright (C) 2015-2017  Han Wang
- */
 public class Categories {
 
     private Map<String, JsonArray> intervalsMap = Maps.newHashMap();
@@ -39,3 +40,4 @@ public class Categories {
         }
     }
 }
+

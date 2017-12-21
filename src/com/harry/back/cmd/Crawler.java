@@ -1,14 +1,14 @@
 package com.harry.back.cmd;
 
-import com.harry.core.Transformer;
-import com.harry.util.Execute;
-import com.harry.util.IO;
+import com.harry.back.core.Transformer;
+import com.harry.back.util.Execute;
+import com.harry.back.util.IO;
+
+import com.harry.back.core.Transformer;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-
-import static com.harry.util.IO.getWriter;
 
 /**
  * Tsmart-build-capture: The build capture component of Tsmart platform
@@ -20,7 +20,7 @@ public class Crawler {
 
 
     public void crawl(String filename) {
-        String command = "./maude.linux64 real-time-maude.maude RMS.maude " + filename + " > temp";
+        String command = "./res/maude.linux64 res/real-time-maude.maude res/RMS.maude " + filename + " > temp";
         Execute.executeCommand(command);
 
         BufferedReader bufferedReader = IO.getReader("temp");
