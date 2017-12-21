@@ -1,4 +1,4 @@
-package com.harry.launcher;
+package com.harry.front.launcher;
 
 /**
  * RMS related tools, parse formatted data into RMS input and run RMS, then visualize output.
@@ -21,7 +21,7 @@ public class AppLauncher extends Application {
     public void start(Stage stage) throws Exception {
         try {
             final Parent root = FXMLLoader.load(getClass().getClassLoader()
-                    .getResource("com/harry/fxml/App.fxml"));
+                    .getResource("com/harry/front/fxml/App.fxml"));
             final Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Table Example");

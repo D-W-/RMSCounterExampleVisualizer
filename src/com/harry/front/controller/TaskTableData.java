@@ -1,4 +1,4 @@
-package com.harry.controller;
+package com.harry.front.controller;
 
 /**
  * RMS related tools, parse formatted data into RMS input and run RMS, then visualize output.
@@ -7,7 +7,7 @@ package com.harry.controller;
  */
 
 import javafx.beans.property.SimpleStringProperty;
-import com.harry.data.Task;
+import com.harry.front.data.Task;
 
 
 public class TaskTableData {

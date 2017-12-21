@@ -1,4 +1,4 @@
-package com.harry.controller;
+package com.harry.front.controller;
 
 /**
  * RMS related tools, parse formatted data into RMS input and run RMS, then visualize output.
@@ -16,7 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
-import com.harry.data.Task;
+import com.harry.front.data.Task;
 
 import java.net.URL;
 import java.util.LinkedList;

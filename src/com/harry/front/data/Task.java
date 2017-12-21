@@ -1,4 +1,4 @@
-package com.harry.data;
+package com.harry.front.data;
 
 /**
  * RMS related tools, parse formatted data into RMS input and run RMS, then visualize output.
