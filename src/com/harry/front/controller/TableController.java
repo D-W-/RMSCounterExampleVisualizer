@@ -9,17 +9,23 @@ package com.harry.front.controller;
 import com.harry.back.cmd.Crawler;
 import com.harry.back.core.InputGenerator;
 import com.harry.back.core.Transformer;
+import com.harry.front.browser.WebViewSample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.print.PrinterJob;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
 import com.harry.front.data.Task;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
@@ -176,6 +182,8 @@ public class TableController implements Initializable {
 //            run crawler
             new Crawler().crawl("test-case.maude");
             new Transformer().transform();
+
+            WebViewSample.run();
 
         }
     }
