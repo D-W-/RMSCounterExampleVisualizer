@@ -20,7 +20,7 @@ public class Crawler {
 
 
     public void crawl(String filename) {
-        String command = "./res/maude.linux64 res/real-time-maude.maude res/RMS.maude " + filename + " > temp";
+        String command = "./res/maude.linux64 real-time-maude.maude RMS.maude " + filename + " > temp";
         Execute.executeCommand(command);
 
         BufferedReader bufferedReader = IO.getReader("temp");

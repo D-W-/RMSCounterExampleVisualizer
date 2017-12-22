@@ -6,14 +6,16 @@ package com.harry.front.controller;
  * Copyright (C) 2015-2017  Han Wang
  */
 
+import com.harry.back.cmd.Crawler;
+import com.harry.back.core.InputGenerator;
+import com.harry.back.core.Transformer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.print.PrinterJob;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
 import com.harry.front.data.Task;
@@ -150,20 +152,34 @@ public class TableController implements Initializable {
     private boolean allFieldsValid() {
         return !interruptCycle.getText().isEmpty()
                 && !scheduling.getText().isEmpty()
-                && !switching.getText().isEmpty()
-                && !taskNumber.getText().isEmpty();
+                && !switching.getText().isEmpty();
     }
 
-    public void run(ActionEvent actionEvent) {
+    public void run(final ActionEvent actionEvent) {
         if(allFieldsValid()) {
-//            data.toArray()
+            int inte = Integer.parseInt(interruptCycle.getText());
+            int sche = Integer.parseInt(scheduling.getText());
+            int swit = Integer.parseInt(switching.getText());
+
             List<Task> tasks = new LinkedList<>();
             for (TaskTableData task : data) {
-                tasks.add(new Task(task.getCycleTime(), task.getRunningTime()));
+                tasks.add(new Task(task.getCycleTime(), task.getRunningTime()).transfer());
             }
+
+            System.out.println(tasks);
+
 //            run backend
+//            generate test cases
+            InputGenerator inputGenerator = new InputGenerator();
+            inputGenerator.setValues(inte, sche, swit, tasks);
+            inputGenerator.generate();
+//            run crawler
+            new Crawler().crawl("test-case.maude");
+            new Transformer().transform();
+
         }
     }
+
 
 
 }

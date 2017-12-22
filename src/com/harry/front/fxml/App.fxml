@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="400.0" maxWidth="500.0" minHeight="400.0" minWidth="500.0" prefHeight="400.0" prefWidth="500.0" styleClass="root" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.harry.front.controller.TableController"
-            stylesheets="style.css">
+<AnchorPane maxHeight="400.0" maxWidth="500.0" minHeight="400.0" minWidth="500.0" prefHeight="400.0" prefWidth="500.0" styleClass="root" stylesheets="style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.harry.front.controller.TableController">
     <children>
         <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -41,7 +40,7 @@
                                 <TextField fx:id="taskNumber" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                             </children>
                         </GridPane>
-                        <Button fx:id="submitAllButton" layoutX="389.0" layoutY="76.0" mnemonicParsing="false" onAction="#run" text="Submit" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="389.0" />
+                        <Button fx:id="submitAllButton" layoutX="389.0" layoutY="76.0" mnemonicParsing="false" onAction="#run" text="Run" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="389.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="191.0" prefWidth="500.0">

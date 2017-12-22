@@ -7,6 +7,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+
+import com.harry.front.data.Task;
 
 /**
  * Tsmart-build-capture: The build capture component of Tsmart platform
@@ -25,6 +28,12 @@ public class InputGenerator {
     private long macro = 1;
     private ArrayList<Task> tasks = Lists.newArrayList();
 
+    public void setValues(int interruptCycle, int scheduling, int switching, List<Task> tasks) {
+        this.interruptCycle = interruptCycle;
+        this.scheduling = scheduling;
+        this.switching = switching;
+        this.tasks.addAll(tasks);
+    }
 
     private void setValues() {
         timeUnit = TimeUnit.us;
@@ -42,10 +51,10 @@ public class InputGenerator {
 
     private void checkProperty() {
         for (Task task : tasks) {
-            if ( (task.runningCycle % interruptCycle) != 0) {
-                throw new RuntimeException("Task running time " + task.runningCycle + " should be integer times of interrupt time");
+            if ( (task.cycle % interruptCycle) != 0) {
+                throw new RuntimeException("Task running time " + task.cycle + " should be integer times of interrupt time");
             } else {
-                task.runningCycle = task.runningCycle/interruptCycle;
+                task.cycle = task.cycle/interruptCycle;
             }
         }
     }
@@ -53,12 +62,12 @@ public class InputGenerator {
     private void calculateMacro() {
         macro = 1;
         for (Task task : tasks) {
-            macro = lcm(macro, task.runningCycle);
+            macro = lcm(macro, task.cycle);
         }
     }
 
     private void generateInputFile() {
-        BufferedWriter bufferedWriter = IO.getWriter("test-case.maude");
+        BufferedWriter bufferedWriter = IO.getWriter("res/test-case.maude");
         try {
             bufferedWriter.write("set trace off ."); bufferedWriter.newLine();
             bufferedWriter.write("set break off ."); bufferedWriter.newLine();
@@ -97,7 +106,7 @@ public class InputGenerator {
             String[] strTasks = new String[N];
             for (int i = 0; i < N; ++i) {
                 strTasks[i] = String.format("< 't%d : PTask | priority : %d , period : %d , status : DORMANT , cnt : [ 0 / [ %d , %d ] ] >",
-                        i + 1, N - i, tasks.get(i).runningCycle, tasks.get(i).runningTime, tasks.get(i).runningTime);
+                        i + 1, N - i, tasks.get(i).cycle, tasks.get(i).running, tasks.get(i).running);
             }
             bufferedWriter.write("  eq tasklist = ");
             for (int i = 0; i < N; i++) {
@@ -131,7 +140,7 @@ public class InputGenerator {
 
 
     public void generate() {
-        setValues();
+//        setValues();
         sortTasks();
         checkProperty();
         calculateMacro();
