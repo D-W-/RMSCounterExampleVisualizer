@@ -19,13 +19,14 @@ public class Crawler {
 
 
 
-    public void crawl(String filename) {
+    public boolean crawl(String filename) {
         String command = "./res/maude.linux64 real-time-maude.maude RMS.maude " + filename + " > temp";
         Execute.executeCommand(command);
 
         BufferedReader bufferedReader = IO.getReader("temp");
         BufferedWriter bufferedWriter = IO.getWriter("error.json");
         boolean writeLine = false;
+        boolean wrote = false;
         String line = null;
         try {
             while((line = bufferedReader.readLine()) != null){
@@ -33,8 +34,10 @@ public class Crawler {
                     writeLine = false;
                 if (writeLine)
                     bufferedWriter.write(line);
-                if (line.startsWith("Result ModelCheckResult"))
+                if (line.startsWith("Result ModelCheckResult")) {
                     writeLine = true;
+                    wrote = true;
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,11 +49,11 @@ public class Crawler {
                 e.printStackTrace();
             }
         }
-
+        return !wrote;
     }
 
     public static void main(String[] args) {
-        new Crawler().crawl("example-false.maude");
+        new Crawler().crawl("example-true.maude");
         new Transformer().transform();
     }
 }

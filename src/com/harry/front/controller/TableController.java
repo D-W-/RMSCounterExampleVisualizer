@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class TableController implements Initializable {
@@ -180,10 +181,17 @@ public class TableController implements Initializable {
             inputGenerator.setValues(inte, sche, swit, tasks);
             inputGenerator.generate();
 //            run crawler
-            new Crawler().crawl("test-case.maude");
-            new Transformer().transform();
+            boolean result = new Crawler().crawl("test-case.maude");
+            Alert.AlertType type = result ? Alert.AlertType.INFORMATION: Alert.AlertType.CONFIRMATION;
+            Alert alert = new Alert(type);
+            String s = result ? "True" : "False";
+            alert.setContentText(s);
+            Optional<ButtonType> buttonResult = alert.showAndWait();
 
-            WebViewSample.run();
+            if (type == Alert.AlertType.CONFIRMATION && (buttonResult.isPresent()) && (buttonResult.get() == ButtonType.OK)) {
+                new Transformer().transform();
+                WebViewSample.run();
+            }
 
         }
     }
