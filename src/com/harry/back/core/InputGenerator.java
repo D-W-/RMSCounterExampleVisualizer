@@ -52,7 +52,7 @@ public class InputGenerator {
     private void checkProperty() {
         for (Task task : tasks) {
             if ( (task.cycle % interruptCycle) != 0) {
-                throw new RuntimeException("Task running time " + task.cycle + " should be integer times of interrupt time");
+                throw new RuntimeException("Task running time " + task.cycle + " should be integer times of interrupt time " + interruptCycle);
             } else {
                 task.cycle = task.cycle/interruptCycle;
             }

@@ -22,6 +22,7 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
 import com.harry.front.data.Task;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -224,13 +225,22 @@ public class TableController implements Initializable {
 //            generate test cases
             InputGenerator inputGenerator = new InputGenerator();
             inputGenerator.setValues(interruptCycleTime, schedulingIntTime, switchingTime, tasks);
-            inputGenerator.generate();
+            try {
+                inputGenerator.generate();
+            } catch (Exception exception) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText(exception.getMessage());
+                alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                alert.showAndWait();
+                return;
+            }
+
 //            run crawler
             boolean result = new Crawler().crawl("test-case.maude");
             Alert.AlertType type = result ? Alert.AlertType.INFORMATION: Alert.AlertType.CONFIRMATION;
             Alert alert = new Alert(type);
             String s = result ? "True" : "False";
-            alert.setContentText(s);
+            alert.setContentText("Analyse Result : " + s);
             Optional<ButtonType> buttonResult = alert.showAndWait();
 
             if (type == Alert.AlertType.CONFIRMATION && (buttonResult.isPresent()) && (buttonResult.get() == ButtonType.OK)) {
