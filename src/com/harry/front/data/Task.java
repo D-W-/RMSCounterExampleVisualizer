@@ -10,20 +10,23 @@ public class Task implements Comparable<Task> {
     private String taskID;
     private String cyclyeTime;
     private String runningTime;
+    private int taskNumber;
 
     public Integer cycle;
     public Integer running;
 
-    public Task(String cyclyeTime, String runningTime, String taskID) {
+    public Task(String cyclyeTime, String runningTime, int taskNumber) {
         super();
         this.cyclyeTime = cyclyeTime;
         this.runningTime = runningTime;
-        this.taskID = taskID;
+//        this.taskID = taskID;
+        this.taskNumber = taskNumber;
     }
 
-    public Task(int cycle, int running) {
+    public Task(int cycle, int running, int taskNumber) {
         this.cycle = cycle;
         this.running = running;
+        this.taskNumber = taskNumber;
     }
 
     public Task transfer() {
@@ -64,5 +67,13 @@ public class Task implements Comparable<Task> {
 
     public void setTaskID(String taskID) {
         this.taskID = taskID;
+    }
+
+    public int getTaskNumber() {
+        return taskNumber;
+    }
+
+    public void setTaskNumber(int taskNumber) {
+        this.taskNumber = taskNumber;
     }
 }

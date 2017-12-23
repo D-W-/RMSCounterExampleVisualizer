@@ -37,6 +37,7 @@ public class TableController implements Initializable {
     private Integer interruptCycleTime;
     private Integer schedulingIntTime;
     private Integer switchingTime;
+    private int taskCounter = 1;
     private List<Task> tasks = new LinkedList<>();
 
     @FXML
@@ -155,7 +156,8 @@ public class TableController implements Initializable {
     public void submit(final ActionEvent actionEvent) {
         final String cycleTime = cycleTimeTextfield.getText();
         final String runningTime = runningTimeTextfield.getText();
-        data.add(new TaskTableData(cycleTime, runningTime, "T_"));
+        data.add(new TaskTableData(cycleTime, runningTime, taskCounter));
+        taskCounter++;
     }
 
     private int formalizeData(String data) {
@@ -204,7 +206,7 @@ public class TableController implements Initializable {
                 if (!task.getCycleTime().trim().isEmpty() && !task.getRunningTime().trim().isEmpty()) {
                     cycleTime = formalizeData(task.getCycleTime());
                     runningTime = formalizeData(task.getRunningTime());
-                    tasks.add(new Task(cycleTime, runningTime));
+                    tasks.add(new Task(cycleTime, runningTime, task.getTaskNumber()));
                 }
             }
         } catch (Exception exception) {

@@ -35,15 +35,15 @@ public class InputGenerator {
         this.tasks.addAll(tasks);
     }
 
-    private void setValues() {
-        timeUnit = TimeUnit.us;
-        interruptCycle = 5000;
-        scheduling = 38;
-        switching = 20;
-        tasks.add(new Task(5000, 2500));
-        tasks.add(new Task(10000, 1500));
-        tasks.add(new Task(15000, 4500));
-    }
+//    private void setValues() {
+//        timeUnit = TimeUnit.us;
+//        interruptCycle = 5000;
+//        scheduling = 38;
+//        switching = 20;
+//        tasks.add(new Task(5000, 2500));
+//        tasks.add(new Task(10000, 1500));
+//        tasks.add(new Task(15000, 4500));
+//    }
 
     private void sortTasks() {
         Collections.sort(tasks);
@@ -106,7 +106,7 @@ public class InputGenerator {
             String[] strTasks = new String[N];
             for (int i = 0; i < N; ++i) {
                 strTasks[i] = String.format("< 't%d : PTask | priority : %d , period : %d , status : DORMANT , cnt : [ 0 / [ %d , %d ] ] >",
-                        i + 1, N - i, tasks.get(i).cycle, tasks.get(i).running, tasks.get(i).running);
+                        tasks.get(i).getTaskNumber(), N - i, tasks.get(i).cycle, tasks.get(i).running, tasks.get(i).running);
             }
             bufferedWriter.write("  eq tasklist = ");
             for (int i = 0; i < N; i++) {
