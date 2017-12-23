@@ -14,15 +14,18 @@ public class TaskTableData {
 
     private SimpleStringProperty cycleTime;
     private SimpleStringProperty runningTime;
+    private SimpleStringProperty taskID;
 
     public TaskTableData(Task task) {
         this.cycleTime = new SimpleStringProperty(task.getCyclyeTime());
         this.runningTime = new SimpleStringProperty(task.getRunningTime());
+        this.taskID = new SimpleStringProperty(task.getTaskID());
     }
 
-    public TaskTableData(final String cycleTime, final String runningTime) {
+    public TaskTableData(final String cycleTime, final String runningTime, final String taskID) {
         this.cycleTime = new SimpleStringProperty(cycleTime);
         this.runningTime = new SimpleStringProperty(runningTime);
+        this.taskID = new SimpleStringProperty(taskID);
     }
 
 
@@ -48,5 +51,17 @@ public class TaskTableData {
 
     public void setRunningTime(String runningTime) {
         this.runningTime.set(runningTime);
+    }
+
+    public String getTaskID() {
+        return taskID.get();
+    }
+
+    public SimpleStringProperty taskIDProperty() {
+        return taskID;
+    }
+
+    public void setTaskID(String taskID) {
+        this.taskID.set(taskID);
     }
 }

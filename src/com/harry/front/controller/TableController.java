@@ -15,23 +15,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.print.PrinterJob;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
 import com.harry.front.data.Task;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 import javafx.util.converter.DefaultStringConverter;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import java.util.regex.Pattern;
 
 import static com.harry.front.cell.EditCell.forTableColumn;
 
@@ -163,7 +155,7 @@ public class TableController implements Initializable {
     public void submit(final ActionEvent actionEvent) {
         final String cycleTime = cycleTimeTextfield.getText();
         final String runningTime = runningTimeTextfield.getText();
-        data.add(new TaskTableData(cycleTime, runningTime));
+        data.add(new TaskTableData(cycleTime, runningTime, "T_"));
     }
 
     private int formalizeData(String data) {

@@ -64,12 +64,17 @@
                 </AnchorPane>
                 <TableView fx:id="table" prefHeight="202.0" prefWidth="500.0">
                     <columns>
-                        <TableColumn fx:id="cycleTimeColumn" prefWidth="248.0" text="Cycle Time">
+                        <TableColumn fx:id="taskIDColumn" prefWidth="83.0" text="TaskID">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="taskID" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="cycleTimeColumn" prefWidth="218.0" text="Cycle Time">
                             <cellValueFactory>
                                 <PropertyValueFactory property="cycleTime" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="runningTimeColumn" prefWidth="251.0" text="Running Time">
+                        <TableColumn fx:id="runningTimeColumn" prefWidth="198.0" text="Running Time">
                             <cellValueFactory>
                                 <PropertyValueFactory property="runningTime" />
                             </cellValueFactory>
