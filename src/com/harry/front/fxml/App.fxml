@@ -33,11 +33,9 @@
                                 <Label text="Interrupt Cycle" />
                                 <Label text="C_scheduling" GridPane.rowIndex="1" />
                                 <Label text="C_switching" GridPane.rowIndex="2" />
-                                <Label text="Task Numbber" GridPane.rowIndex="3" />
                                 <TextField fx:id="interruptCycle" GridPane.columnIndex="1" />
                                 <TextField fx:id="scheduling" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                 <TextField fx:id="switching" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                <TextField fx:id="taskNumber" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                             </children>
                         </GridPane>
                         <Button fx:id="submitAllButton" layoutX="389.0" layoutY="76.0" mnemonicParsing="false" onAction="#run" text="Run" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="389.0" />

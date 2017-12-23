@@ -27,17 +27,20 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.regex.Pattern;
 
 public class TableController implements Initializable {
 
     public TextField interruptCycle;
     public TextField scheduling;
     public TextField switching;
-    public TextField taskNumber;
+//    public TextField taskNumber;
+
+    private Integer interruptCycleTime;
+    private Integer schedulingIntTime;
+    private Integer switchingTime;
+    private List<Task> tasks = new LinkedList<>();
 
     @FXML
     private TableView<TaskTableData> table;
@@ -156,29 +159,71 @@ public class TableController implements Initializable {
         data.add(new TaskTableData(cycleTime, runningTime));
     }
 
+    private int formalizeData(String data) {
+        Scanner scanner = new Scanner(data);
+        int time = 0;
+        Double timeDouble = 0.0;
+        if (scanner.hasNext())
+            timeDouble = scanner.nextDouble();
+        else
+            throw new RuntimeException();
+        if (scanner.hasNext()) {
+            String unit = scanner.next().toLowerCase();
+            if (unit.equals("ms")) {
+                timeDouble *= 1000;
+                time = timeDouble.intValue();
+            }
+            else if (unit.equals("us")) {
+                time = timeDouble.intValue();
+            }
+            else
+                throw new RuntimeException();
+        }
+        else {
+            time = timeDouble.intValue();
+        }
+        return time;
+    }
+
     private boolean allFieldsValid() {
-        return !interruptCycle.getText().isEmpty()
-                && !scheduling.getText().isEmpty()
-                && !switching.getText().isEmpty();
+//        check empty
+        if (interruptCycle.getText().isEmpty() || scheduling.getText().isEmpty() || switching.getText().isEmpty() || data.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Empty data");
+            alert.showAndWait();
+            return false;
+        }
+//        parse data]
+        try {
+            interruptCycleTime = formalizeData(interruptCycle.getText());
+            schedulingIntTime = formalizeData(scheduling.getText());
+            switchingTime = formalizeData(switching.getText());
+
+            tasks.clear();
+            int cycleTime = 0, runningTime = 0;
+            for (TaskTableData task : data) {
+                cycleTime = formalizeData(task.getCycleTime());
+                runningTime = formalizeData(task.getRunningTime());
+                tasks.add(new Task(cycleTime, runningTime));
+            }
+        } catch (Exception exception) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Data parse error: Supported time units: ms, us");
+            alert.showAndWait();
+            return false;
+        }
+
+        return true;
     }
 
     public void run(final ActionEvent actionEvent) {
         if(allFieldsValid()) {
-            int inte = Integer.parseInt(interruptCycle.getText());
-            int sche = Integer.parseInt(scheduling.getText());
-            int swit = Integer.parseInt(switching.getText());
-
-            List<Task> tasks = new LinkedList<>();
-            for (TaskTableData task : data) {
-                tasks.add(new Task(task.getCycleTime(), task.getRunningTime()).transfer());
-            }
-
-            System.out.println(tasks);
+//            System.out.println(tasks);
 
 //            run backend
 //            generate test cases
             InputGenerator inputGenerator = new InputGenerator();
-            inputGenerator.setValues(inte, sche, swit, tasks);
+            inputGenerator.setValues(interruptCycleTime, schedulingIntTime, switchingTime, tasks);
             inputGenerator.generate();
 //            run crawler
             boolean result = new Crawler().crawl("test-case.maude");
