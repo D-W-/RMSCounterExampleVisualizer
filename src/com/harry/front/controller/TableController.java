@@ -10,6 +10,7 @@ import com.harry.back.cmd.Crawler;
 import com.harry.back.core.InputGenerator;
 import com.harry.back.core.Transformer;
 import com.harry.front.browser.WebViewSample;
+import com.harry.front.cell.EditCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,11 +26,14 @@ import com.harry.front.data.Task;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.converter.DefaultStringConverter;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.regex.Pattern;
+
+import static com.harry.front.cell.EditCell.forTableColumn;
 
 public class TableController implements Initializable {
 
@@ -71,6 +75,7 @@ public class TableController implements Initializable {
 
     private void setupCycleTimeColumn() {
 //        updates the cycleTime field on the TaskTableData to the committed value
+        cycleTimeColumn.setCellFactory(EditCell.<TaskTableData, String>forTableColumn(new DefaultStringConverter()));
         cycleTimeColumn.setOnEditCommit(event -> {
             final String value = event.getNewValue() != null ? event.getNewValue() : event.getOldValue();
             ((TaskTableData) event.getTableView().getItems()
@@ -81,6 +86,7 @@ public class TableController implements Initializable {
 
     private void setupRunningTimeColumn() {
 //        updates the cycleTime field on the TaskTableData to the committed value
+        runningTimeColumn.setCellFactory(EditCell.<TaskTableData, String>forTableColumn(new DefaultStringConverter()));
         runningTimeColumn.setOnEditCommit(event -> {
             final String value = event.getNewValue() != null ? event.getNewValue() : event.getOldValue();
             ((TaskTableData) event.getTableView().getItems()
