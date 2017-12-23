@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class Categories {
 
-    private Map<String, JsonArray> intervalsMap = Maps.newHashMap();
+    private Map<String, JsonArray> intervalsMap = Maps.newTreeMap();
     private JsonArray errorArray = new JsonArray();
 
     public void addIntervals(String id, int start, int end) {

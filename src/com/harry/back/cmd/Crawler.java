@@ -53,7 +53,7 @@ public class Crawler {
     }
 
     public static void main(String[] args) {
-        new Crawler().crawl("example-true.maude");
+        new Crawler().crawl("test-case.maude");
         new Transformer().transform();
     }
 }
