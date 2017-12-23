@@ -200,7 +200,7 @@ public class TableController implements Initializable {
             alert.showAndWait();
             return false;
         }
-//        parse data]
+//        parse data
         try {
             interruptCycleTime = formalizeData(interruptCycle.getText());
             schedulingIntTime = formalizeData(scheduling.getText());
@@ -209,9 +209,11 @@ public class TableController implements Initializable {
             tasks.clear();
             int cycleTime = 0, runningTime = 0;
             for (TaskTableData task : data) {
-                cycleTime = formalizeData(task.getCycleTime());
-                runningTime = formalizeData(task.getRunningTime());
-                tasks.add(new Task(cycleTime, runningTime));
+                if (!task.getCycleTime().trim().isEmpty() && !task.getRunningTime().trim().isEmpty()) {
+                    cycleTime = formalizeData(task.getCycleTime());
+                    runningTime = formalizeData(task.getRunningTime());
+                    tasks.add(new Task(cycleTime, runningTime));
+                }
             }
         } catch (Exception exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
