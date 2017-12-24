@@ -37,7 +37,6 @@ public class TableController implements Initializable {
     private Integer interruptCycleTime;
     private Integer schedulingIntTime;
     private Integer switchingTime;
-    private int taskCounter = 1;
     private List<Task> tasks = new LinkedList<>();
 
     @FXML
@@ -156,8 +155,7 @@ public class TableController implements Initializable {
     public void submit(final ActionEvent actionEvent) {
         final String cycleTime = cycleTimeTextfield.getText();
         final String runningTime = runningTimeTextfield.getText();
-        data.add(new TaskTableData(cycleTime, runningTime, taskCounter));
-        taskCounter++;
+        data.add(new TaskTableData(cycleTime, runningTime));
     }
 
     private int formalizeData(String data) {
@@ -206,7 +204,7 @@ public class TableController implements Initializable {
                 if (!task.getCycleTime().trim().isEmpty() && !task.getRunningTime().trim().isEmpty()) {
                     cycleTime = formalizeData(task.getCycleTime());
                     runningTime = formalizeData(task.getRunningTime());
-                    tasks.add(new Task(cycleTime, runningTime, task.getTaskNumber()));
+                    tasks.add(new Task(cycleTime, runningTime));
                 }
             }
 //            sort tasks
@@ -218,7 +216,7 @@ public class TableController implements Initializable {
                 counter++;
             }
 
-//            return false;
+            return false;
         } catch (Exception exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Data parse error: Supported time units: ms, us");
@@ -226,14 +224,11 @@ public class TableController implements Initializable {
             return false;
         }
 
-        return true;
+//        return true;
     }
 
     public void run(final ActionEvent actionEvent) {
         if(allFieldsValid()) {
-//            sort tasks
-
-
 //            run backend
 //            generate test cases
             InputGenerator inputGenerator = new InputGenerator();

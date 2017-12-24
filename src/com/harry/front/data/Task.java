@@ -7,26 +7,22 @@ package com.harry.front.data;
  */
 public class Task implements Comparable<Task> {
 
-    private String taskID;
     private String cyclyeTime;
     private String runningTime;
-    private int taskNumber;
 
     public Integer cycle;
     public Integer running;
 
-    public Task(String cyclyeTime, String runningTime, int taskNumber) {
+    public Task(String cyclyeTime, String runningTime) {
         super();
         this.cyclyeTime = cyclyeTime;
         this.runningTime = runningTime;
-//        this.taskID = taskID;
-        this.taskNumber = taskNumber;
+
     }
 
-    public Task(int cycle, int running, int taskNumber) {
+    public Task(int cycle, int running) {
         this.cycle = cycle;
         this.running = running;
-        this.taskNumber = taskNumber;
     }
 
     public Task transfer() {
@@ -61,19 +57,4 @@ public class Task implements Comparable<Task> {
         return cycle.compareTo(task.cycle);
     }
 
-    public String getTaskID() {
-        return taskID;
-    }
-
-    public void setTaskID(String taskID) {
-        this.taskID = taskID;
-    }
-
-    public int getTaskNumber() {
-        return taskNumber;
-    }
-
-    public void setTaskNumber(int taskNumber) {
-        this.taskNumber = taskNumber;
-    }
 }

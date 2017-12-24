@@ -106,7 +106,7 @@ public class InputGenerator {
             String[] strTasks = new String[N];
             for (int i = 0; i < N; ++i) {
                 strTasks[i] = String.format("< 't%d : PTask | priority : %d , period : %d , status : DORMANT , cnt : [ 0 / [ %d , %d ] ] >",
-                        tasks.get(i).getTaskNumber(), N - i, tasks.get(i).cycle, tasks.get(i).running, tasks.get(i).running);
+                        i + 1, N - i, tasks.get(i).cycle, tasks.get(i).running, tasks.get(i).running);
             }
             bufferedWriter.write("  eq tasklist = ");
             for (int i = 0; i < N; i++) {
