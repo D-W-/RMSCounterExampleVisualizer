@@ -209,6 +209,16 @@ public class TableController implements Initializable {
                     tasks.add(new Task(cycleTime, runningTime, task.getTaskNumber()));
                 }
             }
+//            sort tasks
+            Collections.sort(tasks);
+            data.clear();
+            int counter = 1;
+            for (Task task : tasks) {
+                data.add(new TaskTableData(String.valueOf(task.cycle), String.valueOf(task.running), counter));
+                counter++;
+            }
+
+//            return false;
         } catch (Exception exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Data parse error: Supported time units: ms, us");
@@ -221,7 +231,8 @@ public class TableController implements Initializable {
 
     public void run(final ActionEvent actionEvent) {
         if(allFieldsValid()) {
-//            System.out.println(tasks);
+//            sort tasks
+
 
 //            run backend
 //            generate test cases

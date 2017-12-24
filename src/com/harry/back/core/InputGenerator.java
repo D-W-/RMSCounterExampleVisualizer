@@ -141,7 +141,7 @@ public class InputGenerator {
 
     public void generate() {
 //        setValues();
-        sortTasks();
+//        sortTasks();
         checkProperty();
         calculateMacro();
         generateInputFile();
