@@ -19,6 +19,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
 
 
@@ -43,8 +44,10 @@ class Browser extends Region {
         //apply the styles
         getStyleClass().add("browser");
         // load the web page
-        URL url = this.getClass().getResource("/main.html");
-        webEngine.load(url.toString());
+//        URL url = this.getClass().getResource("/main.html");
+//        webEngine.load(url.toString());
+        File file = new File("res/main.html");
+        webEngine.load(file.toURI().toString());
         //add the web view to the scene
         getChildren().add(browser);
 

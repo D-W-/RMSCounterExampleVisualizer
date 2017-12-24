@@ -31,7 +31,7 @@ public class Transformer {
     private Pattern errorRE = Pattern.compile("error");
     private Type storeType = new TypeToken<Categories>(){}.getType();
     private String logPath = "error.json";
-    private String outputJsonPath = "out/production/RMSCounterExampleVisualizer/data.json";
+    private String outputJsonPath = "res/data.json";
 
     private Categories categories = new Categories();
 

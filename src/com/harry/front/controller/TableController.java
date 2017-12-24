@@ -216,7 +216,7 @@ public class TableController implements Initializable {
                 counter++;
             }
 
-            return false;
+//            return false;
         } catch (Exception exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Data parse error: Supported time units: ms, us");
@@ -224,7 +224,7 @@ public class TableController implements Initializable {
             return false;
         }
 
-//        return true;
+        return true;
     }
 
     public void run(final ActionEvent actionEvent) {
@@ -244,7 +244,7 @@ public class TableController implements Initializable {
             }
 
 //            run crawler
-            boolean result = new Crawler().crawl("test-case.maude");
+            boolean result = new Crawler().crawl("res/test-case.maude");
             Alert.AlertType type = result ? Alert.AlertType.INFORMATION: Alert.AlertType.CONFIRMATION;
             Alert alert = new Alert(type);
             String s = result ? "True" : "False";
