@@ -26,7 +26,7 @@ public class TaskTableData {
     public TaskTableData(final String cycleTime, final String runningTime, int taskNumber) {
         this.cycleTime = new SimpleStringProperty(cycleTime);
         this.runningTime = new SimpleStringProperty(runningTime);
-        this.taskID = new SimpleStringProperty("t" + taskNumber);
+        this.taskID = new SimpleStringProperty("task" + taskNumber);
         this.taskNumber = taskNumber;
     }
 

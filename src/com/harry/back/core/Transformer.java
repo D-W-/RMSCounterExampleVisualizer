@@ -68,6 +68,7 @@ public class Transformer {
 //                        pc = matcher.group(1);
 //                        remove all blanks in pc name
                         pc = matcher.group(1).replaceAll("\\s*","");
+                        pc = pc.replaceAll("some", "task");
                         lastPC = pc;
 //                        System.out.println(pc);
                     }
@@ -98,6 +99,7 @@ public class Transformer {
                     if (matcher.find()) {
 //                        handle error
                         this.categories.moveLastIntervalToError(lastPC);
+//                        this.categories.sortCategories();
                         break;
                     }
                 }

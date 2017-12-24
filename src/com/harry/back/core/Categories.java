@@ -11,6 +11,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 
 import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class Categories {
 
@@ -37,6 +39,17 @@ public class Categories {
             JsonArray array = intervalsMap.get(id);
             JsonElement interval = array.get(array.size() - 1);
             this.errorArray.add(interval);
+        }
+    }
+
+    public void sortCategories() {
+        SortedSet<String> keys = new TreeSet<>(intervalsMap.keySet());
+        Map<String, JsonArray> temp = Maps.newTreeMap();
+        temp.putAll(intervalsMap);
+        intervalsMap.clear();
+        for (String key : keys) {
+            intervalsMap.put(key, temp.get(key));
+            System.out.println(key);
         }
     }
 }

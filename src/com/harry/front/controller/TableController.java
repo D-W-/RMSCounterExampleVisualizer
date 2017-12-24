@@ -210,7 +210,7 @@ public class TableController implements Initializable {
 //            sort tasks
             Collections.sort(tasks);
             data.clear();
-            int counter = 1;
+            int counter = 0;
             for (Task task : tasks) {
                 data.add(new TaskTableData(String.valueOf(task.cycle), String.valueOf(task.running), counter));
                 counter++;
