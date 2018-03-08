@@ -32,7 +32,7 @@ public class WebViewSample {
     public static void run(){
         Stage stage = new Stage();
         stage.setTitle("Web View");
-        Scene scene = new Scene(new Browser(),2000,500, Color.web("#666970"));
+        Scene scene = new Scene(new Browser(),1000,500, Color.web("#b7cdff"));
         stage.setScene(scene);
 //        scene.getStylesheets().add("webviewsample/BrowserToolbar.css");
         stage.show();
@@ -79,7 +79,7 @@ class Browser extends Region {
     }
 
     @Override protected double computePrefWidth(double height) {
-        return 2000;
+        return 1000;
     }
 
     @Override protected double computePrefHeight(double width) {
