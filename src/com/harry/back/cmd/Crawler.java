@@ -17,10 +17,20 @@ import java.io.IOException;
  */
 public class Crawler {
 
-
-
     public boolean crawl(String filename) {
-        String command = "./res/maude.linux64 real-time-maude.maude RMS.maude " + filename + " > temp";
+        String platform = "";
+        String osName = System.getProperty("os.name").toLowerCase();
+        if (osName.indexOf("linux") != -1) {
+            if (System.getProperty("os.arch").indexOf("amd64") != -1)
+                platform = "maude.linux64";
+            else
+                platform = "maude.linux";
+        }
+        else if (osName.indexOf("mac") != -1) {
+            platform = "maude.intelDarwin";
+        }
+        Execute.executeCommand("rm temp");
+        String command = "./res/" + platform + " real-time-maude.maude RMS.maude " + filename + " > temp";
         Execute.executeCommand(command);
 
         BufferedReader bufferedReader = IO.getReader("temp");
@@ -53,7 +63,11 @@ public class Crawler {
     }
 
     public static void main(String[] args) {
-        new Crawler().crawl("res/test-case.maude");
-        new Transformer().transform();
+//        new Crawler().crawl("res/test-case.maude");
+//        new Transformer().transform();
+        String osName = System.getProperty("os.name").toLowerCase();
+        String temp = "Mac OS X".toLowerCase();
+        System.out.println(temp.indexOf("linux"));
+        System.out.println(osName);
     }
 }

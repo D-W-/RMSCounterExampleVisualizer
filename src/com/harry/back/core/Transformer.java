@@ -57,7 +57,7 @@ public class Transformer {
             for (int i = 0; i < abstractStates.size(); ++i) {
                 String abstractState = abstractStates.get(i);
                 if (abstractState.endsWith("tick")) {
-                    System.out.println(abstractState);
+//                    System.out.println(abstractState);
 //                    crawl data
                     String pc;
                     int val0, val1;

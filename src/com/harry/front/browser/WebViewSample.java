@@ -6,11 +6,15 @@ package com.harry.front.browser;
  * Copyright (C) 2015-2017  Han Wang
  */
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Worker;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.input.TouchPoint.State;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -39,6 +43,7 @@ class Browser extends Region {
 
     final WebView browser = new WebView();
     final WebEngine webEngine = browser.getEngine();
+    boolean reload = false;
 
     public Browser() {
         //apply the styles
@@ -47,6 +52,14 @@ class Browser extends Region {
 //        URL url = this.getClass().getResource("/main.html");
 //        webEngine.load(url.toString());
         File file = new File("res/main.html");
+        webEngine.getLoadWorker().stateProperty()
+            .addListener((obs, oldValue, newValue) -> {
+                if (newValue == Worker.State.SUCCEEDED && !reload) {
+                    webEngine.executeScript("reloadMe();");
+                    reload = true;
+                }
+            });
+//        webEngine.executeScript("reloadMe();");
         webEngine.load(file.toURI().toString());
         //add the web view to the scene
         getChildren().add(browser);

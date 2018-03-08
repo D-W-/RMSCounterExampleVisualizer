@@ -158,6 +158,10 @@ public class TableController implements Initializable {
         data.add(new TaskTableData(cycleTime, runningTime));
     }
 
+    public void remove(final ActionEvent actionEvent) {
+
+    }
+
     private int formalizeData(String data) {
         Scanner scanner = new Scanner(data);
         int time = 0;
