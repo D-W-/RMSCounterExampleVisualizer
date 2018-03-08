@@ -24,7 +24,8 @@ public class AppLauncher extends Application {
                     .getResource("com/harry/front/fxml/App.fxml"));
             final Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setTitle("Table Example");
+            stage.setTitle("RMS Analyzer");
+            stage.setResizable(false);
 
             stage.setMinHeight(250);
             stage.setMinWidth(500);
