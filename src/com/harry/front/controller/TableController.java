@@ -159,7 +159,10 @@ public class TableController implements Initializable {
     }
 
     public void remove(final ActionEvent actionEvent) {
-
+        TablePosition<TaskTableData, ?> pos = table.getFocusModel()
+            .getFocusedCell();
+        if (pos != null)
+            data.remove(pos.getRow());
     }
 
     private int formalizeData(String data) {
@@ -232,6 +235,7 @@ public class TableController implements Initializable {
     }
 
     public void run(final ActionEvent actionEvent) {
+//        System.out.println(data.get(0).getCycleTime());
         if(allFieldsValid()) {
 //            run backend
 //            generate test cases
