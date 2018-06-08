@@ -32,10 +32,12 @@ public class WebViewSample {
     public static void run(){
         Stage stage = new Stage();
         stage.setTitle("Web View");
+        stage.setResizable(false);
         Scene scene = new Scene(new Browser(),1000,500, Color.web("#b7cdff"));
         stage.setScene(scene);
 //        scene.getStylesheets().add("webviewsample/BrowserToolbar.css");
-        stage.show();
+//        stage.show();
+        stage.showAndWait();
     }
 }
 

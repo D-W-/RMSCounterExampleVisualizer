@@ -30,9 +30,9 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Label text="Interrupt Cycle" />
-                                <Label text="C_scheduling" GridPane.rowIndex="1" />
-                                <Label text="C_switching" GridPane.rowIndex="2" />
+                                <Label text="时钟中断周期" />
+                                <Label text="任务调度耗时" GridPane.rowIndex="1" />
+                                <Label text="任务切换耗时" GridPane.rowIndex="2" />
                                 <TextField fx:id="interruptCycle" GridPane.columnIndex="1" />
                                 <TextField fx:id="scheduling" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                 <TextField fx:id="switching" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -53,8 +53,8 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Label text="Cycle Time" />
-                                <Label text="Running Time" GridPane.rowIndex="1" />
+                                <Label text="任务执行周期" />
+                                <Label text="任务执行时间" GridPane.rowIndex="1" />
                                 <TextField fx:id="cycleTimeTextfield" prefHeight="25.0" prefWidth="199.0" GridPane.columnIndex="1" />
                                 <TextField fx:id="runningTimeTextfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                             </children>
@@ -65,17 +65,17 @@
                 </AnchorPane>
                 <TableView fx:id="table" prefHeight="202.0" prefWidth="500.0">
                     <columns>
-                        <TableColumn fx:id="taskIDColumn" prefWidth="83.0" text="TaskID">
+                        <TableColumn fx:id="taskIDColumn" prefWidth="83.0" text="任务编号">
                             <cellValueFactory>
                                 <PropertyValueFactory property="taskID" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="cycleTimeColumn" prefWidth="218.0" text="Cycle Time">
+                        <TableColumn fx:id="cycleTimeColumn" prefWidth="218.0" text="任务执行周期">
                             <cellValueFactory>
                                 <PropertyValueFactory property="cycleTime" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="runningTimeColumn" prefWidth="198.0" text="Running Time">
+                        <TableColumn fx:id="runningTimeColumn" prefWidth="198.0" text="任务执行时间">
                             <cellValueFactory>
                                 <PropertyValueFactory property="runningTime" />
                             </cellValueFactory>

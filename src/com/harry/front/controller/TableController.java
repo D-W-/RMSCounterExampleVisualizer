@@ -255,8 +255,8 @@ public class TableController implements Initializable {
             boolean result = new Crawler().crawl("res/test-case.maude");
             Alert.AlertType type = result ? Alert.AlertType.INFORMATION: Alert.AlertType.CONFIRMATION;
             Alert alert = new Alert(type);
-            String s = result ? "True" : "False";
-            alert.setContentText("Analyse Result : " + s);
+            String s = result ? "系统通过验证, 满足可调度性!" : "系统不满足可调度性, 是否查看时序图?";
+            alert.setContentText(s);
             Optional<ButtonType> buttonResult = alert.showAndWait();
 
             if (type == Alert.AlertType.CONFIRMATION && (buttonResult.isPresent()) && (buttonResult.get() == ButtonType.OK)) {
