@@ -58,7 +58,7 @@ public class Crawler {
         }
         commands.add(platform);
         commands.addAll(Arrays.asList("res/real-time-maude.maude", "res/RMS.maude", filename));
-        Execute.executeCommand(new LinkedList<String>(Arrays.asList("rm", "temp")));
+//        Execute.executeCommand(new LinkedList<String>(Arrays.asList("rm", "temp")));
         Execute.executeCommand(commands, "temp");
 
         BufferedReader bufferedReader = IO.getReader("temp");

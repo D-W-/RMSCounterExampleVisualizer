@@ -30,6 +30,8 @@ public class Execute {
     public static void executeCommand(List<String> commands, String loc) {
         try {
             ProcessBuilder builder = new ProcessBuilder(commands);
+//            File file = new File(loc);
+//            file.delete();
             builder.redirectOutput(new File(loc));
             Process process = builder.start();
             process.waitFor();
