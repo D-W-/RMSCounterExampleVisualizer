@@ -18,19 +18,40 @@ import java.io.IOException;
 public class Crawler {
 
     public boolean crawl(String filename) {
-        String platform = "";
+
         String osName = System.getProperty("os.name").toLowerCase();
-        if (osName.indexOf("linux") != -1) {
-            if (System.getProperty("os.arch").indexOf("amd64") != -1)
-                platform = "maude.linux64";
-            else
-                platform = "maude.linux";
+        String command = "";
+        if (osName.indexOf("win") != -1) {
+            BufferedReader br = IO.getReader("RMSLOCATION");
+            try {
+                String loc = br.readLine();
+                command = "\"" + loc + "\"" + " res/real-time-maude.maude res/RMS.maude /res" + filename + " > temp";
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            } finally {
+              try {
+                br.close();
+              } catch (IOException e) {
+                e.printStackTrace();
+              }
+            }
         }
-        else if (osName.indexOf("mac") != -1) {
-            platform = "maude.intelDarwin";
+        else {
+            String platform = "";
+            if (osName.indexOf("linux") != -1) {
+                if (System.getProperty("os.arch").indexOf("amd64") != -1)
+                    platform = "maude.linux64";
+                else
+                    platform = "maude.linux";
+            }
+            else if (osName.indexOf("mac") != -1) {
+                platform = "maude.intelDarwin";
+            }
+            command = "./res/" + platform + " real-time-maude.maude RMS.maude " + filename + " > temp";
         }
+
         Execute.executeCommand("rm temp");
-        String command = "./res/" + platform + " real-time-maude.maude RMS.maude " + filename + " > temp";
         Execute.executeCommand(command);
 
         BufferedReader bufferedReader = IO.getReader("temp");
