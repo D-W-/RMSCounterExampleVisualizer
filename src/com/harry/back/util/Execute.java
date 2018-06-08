@@ -7,6 +7,7 @@ package com.harry.back.util;
  */
 
 import java.io.*;
+import java.util.List;
 
 public class Execute {
     /*
@@ -14,24 +15,27 @@ public class Execute {
      */
     public static String[] paths = null;
 
-    public static void executeCommand(String command){
-        Runtime runtime = Runtime.getRuntime();
-        String buffer = "";
+    public static void executeCommand(List<String> commands){
         try {
-            Process process = runtime.exec(new String[] {"/bin/sh","-c",command});
-            int waitID = process.waitFor();
-            if(waitID != 0){
-                InputStreamReader isr = new InputStreamReader(process.getErrorStream());
-                BufferedReader br = new BufferedReader(isr);
-                String line = null;
-                while((line = br.readLine()) != null){
-                    buffer += line;
-                }
-                br.close();
-                isr.close();
-                throw new InterruptedException("shell failed!\n" + buffer);
-            }
-        } catch (IOException | InterruptedException e) {
+            ProcessBuilder builder = new ProcessBuilder(commands);
+            Process process = builder.start();
+            process.waitFor();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void executeCommand(List<String> commands, String loc) {
+        try {
+            ProcessBuilder builder = new ProcessBuilder(commands);
+            builder.redirectOutput(new File(loc));
+            Process process = builder.start();
+            process.waitFor();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

@@ -1,5 +1,6 @@
 package com.harry.back.cmd;
 
+import com.google.common.collect.Lists;
 import com.harry.back.core.Transformer;
 import com.harry.back.util.Execute;
 import com.harry.back.util.IO;
@@ -9,6 +10,10 @@ import com.harry.back.core.Transformer;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Tsmart-build-capture: The build capture component of Tsmart platform
@@ -20,12 +25,14 @@ public class Crawler {
     public boolean crawl(String filename) {
 
         String osName = System.getProperty("os.name").toLowerCase();
-        String command = "";
+//        String command = "";
+      String platform = "";
+        List<String> commands = Lists.newArrayList();
         if (osName.indexOf("win") != -1) {
             BufferedReader br = IO.getReader("RMSLOCATION");
             try {
                 String loc = br.readLine();
-                command = "\"" + loc + "\"" + " res/real-time-maude.maude res/RMS.maude /res" + filename + " > temp";
+                platform = "\"" + loc + "\"";
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;
@@ -38,7 +45,6 @@ public class Crawler {
             }
         }
         else {
-            String platform = "";
             if (osName.indexOf("linux") != -1) {
                 if (System.getProperty("os.arch").indexOf("amd64") != -1)
                     platform = "maude.linux64";
@@ -48,11 +54,12 @@ public class Crawler {
             else if (osName.indexOf("mac") != -1) {
                 platform = "maude.intelDarwin";
             }
-            command = "./res/" + platform + " real-time-maude.maude RMS.maude " + filename + " > temp";
+            platform = "./res/" + platform;
         }
-
-        Execute.executeCommand("rm temp");
-        Execute.executeCommand(command);
+        commands.add(platform);
+        commands.addAll(Arrays.asList("res/real-time-maude.maude", "res/RMS.maude", filename));
+        Execute.executeCommand(new LinkedList<String>(Arrays.asList("rm", "temp")));
+        Execute.executeCommand(commands, "temp");
 
         BufferedReader bufferedReader = IO.getReader("temp");
         BufferedWriter bufferedWriter = IO.getWriter("error.json");
@@ -84,8 +91,8 @@ public class Crawler {
     }
 
     public static void main(String[] args) {
-//        new Crawler().crawl("res/test-case.maude");
-//        new Transformer().transform();
+        new Crawler().crawl("res/test-case.maude");
+        new Transformer().transform();
         String osName = System.getProperty("os.name").toLowerCase();
         String temp = "Mac OS X".toLowerCase();
         System.out.println(temp.indexOf("linux"));
